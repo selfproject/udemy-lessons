@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+.component-box{
+  padding: 10px;
+  border-style: solid #cf6916;
+  margin: 5px;
+  border: #fff2f0;
+  border-style: ridge;
+  box-shadow: 1px 2px #333333;
+  align-items: center;
+}
