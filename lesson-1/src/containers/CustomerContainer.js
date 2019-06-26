@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react'
 import Input from '../Components/Input';
+import Button from '../Components/Button';
+
 import './../Components/Input.css'
 
 
@@ -82,7 +84,7 @@ class CustomerContainer extends Component {
                 validation: {
                     required: false
                 },
-                valid:false,
+                valid:true,
                 touched:false
             },
             Feedback: {
@@ -95,13 +97,13 @@ class CustomerContainer extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: false
                 },
-                valid:false,
+                valid:true,
                 touched:false
-            },
-
-        }
+            }
+        },
+        formIsvalid : false
     }
 
     inputChangeHandler = (event, key) => {
@@ -111,9 +113,17 @@ class CustomerContainer extends Component {
         updateCusotmerFormElement.value = event.target.value;
         updateCusotmerFormElement.valid = this.checkValidityRoles(updateCustomerForm[key].validation,updateCusotmerFormElement.value);
         updateCusotmerFormElement.touched = true;
-        console.log("updateCusotmerFormElement"+JSON.stringify(updateCusotmerFormElement));
         updateCustomerForm[key] = updateCusotmerFormElement;
-        this.setState({ customerForm: updateCustomerForm });
+        
+        let isFormValid = true;
+        for(let elementIdentifier in updateCustomerForm){
+            console.log(">>"+updateCustomerForm[elementIdentifier].valid);
+            isFormValid = updateCustomerForm[elementIdentifier].valid && isFormValid
+        }
+        console.log("isFormValid : "+isFormValid);
+        
+        this.setState({ customerForm: updateCustomerForm,formIsvalid:isFormValid });
+        console.log("updateCusotmerFormElement"+JSON.stringify(this.state));
 
     }
 
@@ -160,7 +170,7 @@ class CustomerContainer extends Component {
                                 value={formElement.value} />
                         ))
                     }
-                    <button value="Submit">Submit</button>
+                    <Button className="submit-button" disabled={!this.state.formIsvalid}>Submit</Button>
                 </form>
             </div>
         )

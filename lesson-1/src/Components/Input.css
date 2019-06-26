@@ -30,3 +30,13 @@
     color: red;
     margin: 5px 0;
 }
+.disable{
+    color :#ccc
+}
+
+.submit-button{
+    color:blue;
+    width: 20%;
+    margin:5px;
+    border: 1px solid #eeeeee;
+}
